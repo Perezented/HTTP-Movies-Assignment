@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import SavedList from './Movies/SavedList';
 import MovieList from './Movies/MovieList';
 import Movie from './Movies/Movie';
-import UpdateMovieForm from './Movies/updateMovieForm';
+import UpdateMovieForm from './Movies/UpdateMovieForm';
 import axios from 'axios';
 
 const App = () => {

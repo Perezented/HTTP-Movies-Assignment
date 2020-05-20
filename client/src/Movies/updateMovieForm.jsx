@@ -20,23 +20,66 @@ const UpdateMovieForm = () => {
         });
     }, []);
 
+    const handleChanges = (e) => {
+        e.persist();
+        let value = e.target.value;
+        setUpdatedMovie({
+            ...updatedMovie,
+            [e.target.name]: value,
+        });
+    };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        Axios.put(`http://localhost:5000/api/movies/${id}`, updatedMovie)
+            .then((res) => {
+                setUpdatedMovie(res.data);
+                push(`/`);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
     return (
         <section>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label>
-                    Title: <input />
+                    Title:{' '}
+                    <input
+                        type="text"
+                        name="title"
+                        onChange={handleChanges}
+                        value={updatedMovie.title}
+                    />
                 </label>
                 <br />
                 <label>
-                    Director: <input />
+                    Director:{' '}
+                    <input
+                        type="text"
+                        name="director"
+                        onChange={handleChanges}
+                        value={updatedMovie.director}
+                    />
                 </label>
                 <br />
                 <label>
-                    Metascore: <input />
+                    Metascore:{' '}
+                    <input
+                        type="number"
+                        name="metascore"
+                        onChange={handleChanges}
+                        value={updatedMovie.metascore}
+                    />
                 </label>
                 <br />
                 <label>
-                    Stars: <input />
+                    Stars:{' '}
+                    <input
+                        type="text"
+                        name="stars"
+                        onChange={handleChanges}
+                        value={updatedMovie.stars}
+                    />
                 </label>
                 <br />
                 <button>Submit changes</button>
