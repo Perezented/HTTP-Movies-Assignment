@@ -3,12 +3,13 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import Axios from 'axios';
 
-const UpdateMovieForm = () => {
+const UpdateMovieForm = (props) => {
+    console.log(props);
     const initialMovie = {
         title: '',
         director: '',
         metascore: '',
-        stars: [],
+        stars: [{}],
     };
     const [updatedMovie, setUpdatedMovie] = useState(initialMovie);
     const { push } = useHistory();
@@ -18,7 +19,7 @@ const UpdateMovieForm = () => {
             console.log(res);
             setUpdatedMovie(res.data);
         });
-    }, []);
+    }, [id]);
 
     const handleChanges = (e) => {
         e.persist();
@@ -33,7 +34,6 @@ const UpdateMovieForm = () => {
         Axios.put(`http://localhost:5000/api/movies/${id}`, updatedMovie)
             .then((res) => {
                 setUpdatedMovie(res.data);
-                push(`/movies`);
             })
             .catch((err) => {
                 console.log(err);
