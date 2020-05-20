@@ -8,7 +8,7 @@ const UpdateMovieForm = () => {
         title: '',
         director: '',
         metascore: '',
-        stars: {},
+        stars: [],
     };
     const [updatedMovie, setUpdatedMovie] = useState(initialMovie);
     const { push } = useHistory();
@@ -33,7 +33,7 @@ const UpdateMovieForm = () => {
         Axios.put(`http://localhost:5000/api/movies/${id}`, updatedMovie)
             .then((res) => {
                 setUpdatedMovie(res.data);
-                push(`/`);
+                push(`/movies`);
             })
             .catch((err) => {
                 console.log(err);

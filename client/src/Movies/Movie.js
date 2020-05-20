@@ -22,6 +22,14 @@ function Movie({ addToSavedList }) {
         fetchMovie(params.id);
     }, [params.id]);
 
+    const deleteMovie = (value) => {
+        axios
+            .delete(`http://localhost:5000/api/movies/${value.id}`)
+            .then((res) => {
+                setMovie(res.data);
+            }, push('/'));
+    };
+
     if (!movie) {
         return <div>Loading movie information...</div>;
     }
@@ -35,6 +43,13 @@ function Movie({ addToSavedList }) {
                 }}
             >
                 Edit
+            </button>
+            <button
+                onClick={() => {
+                    deleteMovie(movie);
+                }}
+            >
+                Delete
             </button>
 
             <div className="save-button" onClick={saveMovie}>
