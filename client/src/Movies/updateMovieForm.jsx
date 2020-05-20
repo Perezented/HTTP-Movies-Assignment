@@ -33,11 +33,14 @@ const UpdateMovieForm = (props) => {
         e.preventDefault();
         Axios.put(`http://localhost:5000/api/movies/${id}`, updatedMovie)
             .then((res) => {
+                console.log(res);
                 setUpdatedMovie(res.data);
+                props.getList();
             })
             .catch((err) => {
                 console.log(err);
             });
+        push('/');
     };
     return (
         <section>
