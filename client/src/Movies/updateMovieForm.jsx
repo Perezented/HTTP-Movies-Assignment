@@ -9,7 +9,7 @@ const UpdateMovieForm = (props) => {
         title: '',
         director: '',
         metascore: '',
-        stars: [{}],
+        stars: [],
     };
     const [updatedMovie, setUpdatedMovie] = useState(initialMovie);
     const { push } = useHistory();
@@ -23,7 +23,10 @@ const UpdateMovieForm = (props) => {
 
     const handleChanges = (e) => {
         e.persist();
-        let value = e.target.value;
+        let value =
+            e.target.name === `stars`
+                ? e.target.value.split(',')
+                : e.target.value;
         setUpdatedMovie({
             ...updatedMovie,
             [e.target.name]: value,
@@ -42,6 +45,8 @@ const UpdateMovieForm = (props) => {
             });
         push('/');
     };
+    console.log(updatedMovie.stars);
+
     return (
         <section>
             <form onSubmit={handleSubmit}>
@@ -81,7 +86,7 @@ const UpdateMovieForm = (props) => {
                         type="text"
                         name="stars"
                         onChange={handleChanges}
-                        value={updatedMovie.stars}
+                        value={updatedMovie.stars.join(',')}
                     />
                 </label>
                 <br />
